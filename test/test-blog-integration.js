@@ -66,7 +66,7 @@ describe('blog posts API resource', function() {
 
   after(function() {
     return closeServer();
-  })
+  });
 
   // note the use of nested `describe` blocks.
   // this allows us to make clearer, more discrete tests that focus
@@ -79,7 +79,6 @@ describe('blog posts API resource', function() {
       //    2. prove res has right status, data type
       //    3. prove the number of blog posts we got back is equal to number
       //       in db.
-
       let res;
       return chai.request(app)
         .get('/posts')
@@ -96,7 +95,6 @@ describe('blog posts API resource', function() {
         });
     });
 
-
     it('should return blog posts with right fields', function() {
       // Strategy: Get back all blog posts, and ensure they have expected keys
 
@@ -108,7 +106,6 @@ describe('blog posts API resource', function() {
           res.should.be.json;
           res.body.should.be.a('array');
           res.body.should.have.length.of.at.least(1);
-
           res.body.forEach(function(post) {
             post.should.be.a('object');
             post.should.include.keys(
@@ -116,9 +113,8 @@ describe('blog posts API resource', function() {
           });
           resPost = res.body[0];
           return BlogPost.findById(resPost.id);
-        })
+        });
         .then(function(post) {
-
           resPost.id.should.equal(post.id);
           resPost.title.should.equal(post.title);
           resPost.content.should.equal(post.content);
