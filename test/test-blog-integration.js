@@ -29,8 +29,8 @@ function seedBlogPostData() {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
       },
-      title: faker.something.title(),
-      content: faker.something.content()
+      title: faker.lorem.sentence(),
+      content: faker.lorem.sentence(),
     });
   }
   // this will return a promise
@@ -91,7 +91,7 @@ describe('blog posts API resource', function() {
           return BlogPost.count();
         })
         .then(function(count) {
-          res.body.should.have.length.of(count);
+          res.body.should.have.lengthOf(count);
         });
     });
 
@@ -113,13 +113,14 @@ describe('blog posts API resource', function() {
           });
           resPost = res.body[0];
           return BlogPost.findById(resPost.id);
-        });
+        })
         .then(function(post) {
           resPost.id.should.equal(post.id);
           resPost.title.should.equal(post.title);
           resPost.content.should.equal(post.content);
-          resPost.author.should.equal(post.author);
+          resPost.author.should.equal(`${post.author.firstName} ${post.author.lastName}`);
         });
+
     });
   });
 
@@ -131,14 +132,13 @@ describe('blog posts API resource', function() {
     it('should add a new blog post', function() {
 
       const newPost = {
-          title: faker.something.sentence(),
+          title: faker.lorem.sentence(),
           author: {
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-          }
-          content: faker.something.content()
+          },
+          content: faker.lorem.paragraph()
       };
-
       return chai.request(app)
         .post('/posts')
         .send(newPost)
@@ -152,11 +152,11 @@ describe('blog posts API resource', function() {
           // cause Mongo should have created id on insertion
           res.body.id.should.not.be.null;
           res.body.content.should.equal(newPost.content);
-          res.body.author.should.equal(newPost.author);
+          res.body.author.should.equal(`${newPost.author.firstName} ${newPost.author.lastName}`);
           return BlogPost.findById(res.body.id);
         })
         .then(function(post) {
-          post.title.should.equal(newPost.title;
+          post.title.should.equal(newPost.title);
           post.content.should.equal(newPost.content);
           post.author.firstName.should.equal(newPost.author.firstName);
           post.author.lastName.should.equal(newPost.author.lastName);
@@ -180,12 +180,10 @@ describe('blog posts API resource', function() {
           lastName: 'Wallace'
         }
       };
-
       return BlogPost
         .findOne()
         .then(function(post) {
           updateData.id = post.id;
-
           // make request then inspect it to make sure it reflects
           // data we sent
           return chai.request(app)
@@ -198,7 +196,7 @@ describe('blog posts API resource', function() {
           return BlogPost.findById(updateData.id);
         })
         .then(function(post) {
-          post.title.should.equal(updateData.title;
+          post.title.should.equal(updateData.title);
           post.content.should.equal(updateData.content);
           post.author.firstName.should.equal(updateData.author.firstName);
           post.author.lastName.should.equal(updateData.author.lastName);
