@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: pyVeP6e4tnu7WsYvcpZSbYJi3cy9smlv1XNTPN+JdlWpH892LqSMJ3JLKdbqiEhYEhmUkpapPChMFvvbMFp9aUZJpFum2QMULZEhyz3PYjX0Xm4+8nhGE0jpZOw4PMHwPejCbrhDsBDnIfKC1SzdUOnDOLwHVhQxkcgMeHf948NAX3Low9d4wUVsru/gTnxyd56/AKTyRmEa5vJdPWt1IG5okmQoDD/GUnbtoglCudjTqfLF61qqfy8JIRluAmC5/ePowF39NjKkvMvwSYpsoeoYp3RW8XKtHIpIBO6eHXYpBu9cXESTvQ1ydMcfAUsFmDkR6fnJqJ8G+s5I/3BbslgWkHB2AtSXLSGkqFug8giNt6kXhTeW1buA+LKkMpJKZNI3l+AwNjpYI8SaZh+EyE5qn4lltJN/XJGzk07TjWvnsQSrnNR1aCml/dFBH81jCkZNDLaFGIFhkDHd+koISouvbA7YtH5TBiz34p1KEXAisUe1bf93cSMu6uxPO0Z8wHsxzJnVR6cxcsALzwWMUV1bjuGzo83IRuxNBTT+7HQ/xLSrlpvS9Few8Je2LvurZ75gnbah7Ye/cgvQQyXQSU4Lm0SprOis1dS5Dyfe632pdKUAFt8pAu8IY5Eo5Miu9smcUxOkEcIa7ChYaFma7qdX6Ec870ogtIHFBZU3tDo=
+  app: guarded-badlands-39055
+  on:
+    repo: Laurawbrooklyn/blog-app-mongoose-challenge-solution
